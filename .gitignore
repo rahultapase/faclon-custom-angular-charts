@@ -24,6 +24,7 @@ yarn-error.log
 
 # VS Code — keep shared config, ignore personal/local overrides
 .vscode/*
+.vscode
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json

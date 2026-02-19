@@ -1,17 +1,10 @@
-# 📊 DataPulse
+# DataPulse - Custom Chart Component
 
 A reusable, SVG-powered chart component built with **Angular 21** — no external chart libraries used. Supports **Line**, **Column**, and **Pie** charts rendered entirely with custom SVG logic.
 
----
-
 ## Live Demo
 
-| | Link |
-|---|---|
-| 🚀 Deployed App | [faclon-custom-angular-charts.vercel.app](https://faclon-custom-angular-charts.vercel.app) |
-| 💻 Source Code | [github.com/rahultapase/faclon-custom-angular-charts](https://github.com/rahultapase/faclon-custom-angular-charts) |
-
----
+**[View Live Demo](https://faclon-custom-angular-charts.vercel.app)**
 
 ## Features
 
@@ -26,7 +19,6 @@ A reusable, SVG-powered chart component built with **Angular 21** — no externa
 - **OnPush change detection** — all components use `ChangeDetectionStrategy.OnPush` for optimal performance
 - **Angular Signals** — modern reactive state with `signal()`, `computed()`, and `input.required()`
 
----
 
 ## Screenshots
 
@@ -42,7 +34,6 @@ A reusable, SVG-powered chart component built with **Angular 21** — no externa
 |---|---|---|
 | ![Line Chart Dark](screenshots/dark-line-chart.png) | ![Column Chart Dark](screenshots/dark-column-chart.png) | ![Pie Chart Dark](screenshots/dark-pie-chart.png) |
 
----
 
 ## Usage
 
@@ -83,7 +74,6 @@ chartOptions: ChartOptions = {
 <io-chart [chartOptions]="chartOptions" />
 ```
 
----
 
 ## Project Structure
 
@@ -109,7 +99,7 @@ src/
                 └── chart-tooltip/        # Fixed-position hover tooltip
 ```
 
----
+
 
 ## Approach & Architecture
 
@@ -132,7 +122,6 @@ Uses **Angular Signals** (`signal()`, `computed()`, `input.required()`) for reac
 - **Pie chart**: scale + rotate entrance, individual slice fade-ins
 - **Chart swap**: Angular `@trigger` animation with cross-fade between chart types
 
----
 
 ## Getting Started
 

@@ -1,0 +1,88 @@
+<svg
+  class="chart-line-svg"
+  [attr.viewBox]="viewBox()"
+  preserveAspectRatio="xMidYMid meet"
+>
+  <defs>
+    <linearGradient [attr.id]="'areaGrad'" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" [attr.stop-color]="lineColor()" stop-opacity="0.25" />
+      <stop offset="100%" [attr.stop-color]="lineColor()" stop-opacity="0.02" />
+    </linearGradient>
+  </defs>
+
+  <!-- Grid lines -->
+  @for (g of gridLines(); track g.value) {
+    <line
+      class="grid-line"
+      [attr.x1]="area().x"
+      [attr.y1]="g.y"
+      [attr.x2]="area().x + area().width"
+      [attr.y2]="g.y"
+    />
+    <text
+      class="axis-label y-label"
+      [attr.x]="area().x - 10"
+      [attr.y]="g.y + 4"
+      text-anchor="end"
+    >
+      {{ g.label }}
+    </text>
+  }
+
+  <!-- X axis baseline -->
+  <line
+    class="axis-line"
+    [attr.x1]="area().x"
+    [attr.y1]="area().y + area().height"
+    [attr.x2]="area().x + area().width"
+    [attr.y2]="area().y + area().height"
+  />
+
+  <!-- X axis labels -->
+  @for (pt of points(); track pt.index) {
+    <text
+      class="axis-label x-label"
+      [attr.x]="pt.x"
+      [attr.y]="area().y + area().height + 22"
+      text-anchor="middle"
+    >
+      {{ pt.item.name }}
+    </text>
+  }
+
+  <!-- Area fill under line -->
+  @if (areaPath()) {
+    <path
+      class="area-fill"
+      [attr.d]="areaPath()"
+      [attr.fill]="'url(#areaGrad)'"
+    />
+  }
+
+  <!-- Line -->
+  @if (points().length > 1) {
+    <polyline
+      class="data-line"
+      [attr.points]="polylinePoints()"
+      [attr.stroke]="lineColor()"
+      fill="none"
+    />
+  }
+
+  <!-- Data points -->
+  @for (pt of points(); track pt.index) {
+    <circle
+      class="data-point"
+      [class.hovered]="hoveredIndex() === pt.index"
+      [attr.cx]="pt.x"
+      [attr.cy]="pt.y"
+      [attr.fill]="pt.item.color"
+      [attr.r]="hoveredIndex() === pt.index ? 7 : 4.5"
+      [attr.stroke]="pt.item.color"
+      stroke-width="2"
+      (mouseenter)="onPointEnter(pt.index, $event)"
+      (mouseleave)="onPointLeave()"
+      [style.animation-delay]="(pt.index * 80) + 'ms'"
+    />
+  }
+</svg>

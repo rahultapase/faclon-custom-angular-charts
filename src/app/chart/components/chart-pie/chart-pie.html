@@ -1,0 +1,57 @@
+<svg
+  class="chart-pie-svg"
+  [attr.viewBox]="viewBox()"
+  preserveAspectRatio="xMidYMid meet"
+>
+  @if (isEmpty()) {
+    <text
+      class="empty-text"
+      [attr.x]="center().cx"
+      [attr.y]="center().cy"
+      text-anchor="middle"
+      dominant-baseline="middle"
+    >
+      No data
+    </text>
+  } @else {
+    <g class="pie-group">
+      @for (slice of slices(); track slice.index) {
+        <path
+          class="slice"
+          [class.hovered]="hoveredIndex() === slice.index"
+          [class.dimmed]="hoveredIndex() !== null && hoveredIndex() !== slice.index"
+          [attr.d]="slice.path"
+          [attr.fill]="slice.item.color"
+          [attr.transform]="getHoverTransform(slice.index)"
+          [style.animation-delay]="(slice.index * 120) + 'ms'"
+          (mouseenter)="onSliceEnter(slice.index, $event)"
+          (mouseleave)="onSliceLeave()"
+        />
+      }
+
+      <!-- Percentage labels -->
+      @for (slice of slices(); track slice.index) {
+        @if (slice.percentage >= 5) {
+          <text
+            class="slice-label"
+            [attr.x]="slice.labelX"
+            [attr.y]="slice.labelY"
+            text-anchor="middle"
+            dominant-baseline="middle"
+            [style.animation-delay]="(slice.index * 120 + 300) + 'ms'"
+          >
+            {{ slice.percentage }}%
+          </text>
+        }
+      }
+
+      <!-- Center donut hole -->
+      <circle
+        class="donut-hole"
+        [attr.cx]="center().cx"
+        [attr.cy]="center().cy"
+        [attr.r]="radius() * 0.42"
+      />
+    </g>
+  }
+</svg>

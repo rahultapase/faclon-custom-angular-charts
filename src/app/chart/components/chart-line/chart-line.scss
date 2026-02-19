@@ -1,0 +1,84 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+.chart-line-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.grid-line {
+  stroke: var(--chart-grid);
+  stroke-width: 1;
+  stroke-dasharray: 4, 4;
+}
+
+.axis-line {
+  stroke: var(--chart-grid);
+  stroke-width: 1.5;
+}
+
+.axis-label {
+  fill: var(--chart-text-muted);
+  font-family: var(--chart-font-body);
+  font-size: 10px;
+  letter-spacing: 0.02em;
+
+  &.x-label {
+    font-size: 11px;
+  }
+}
+
+.area-fill {
+  opacity: 0;
+  animation: fadeAreaIn 0.8s ease-out 0.5s forwards;
+}
+
+.data-line {
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: drawLine 1.2s ease-out 0.2s forwards;
+}
+
+.data-point {
+  fill-opacity: 0.9;
+  stroke-opacity: 0.4;
+  cursor: pointer;
+  transition: r 0.2s ease, fill-opacity 0.2s ease, stroke-opacity 0.2s ease;
+  opacity: 0;
+  animation: fadePointIn 0.4s ease-out forwards;
+
+  &.hovered {
+    fill-opacity: 1;
+    stroke-opacity: 0.8;
+    filter: drop-shadow(0 0 6px currentColor);
+  }
+}
+
+@keyframes drawLine {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fadePointIn {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeAreaIn {
+  to {
+    opacity: 1;
+  }
+}

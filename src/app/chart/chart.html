@@ -1,0 +1,57 @@
+<div class="chart-card">
+  <!-- Title -->
+  @if (title()) {
+    <h3 class="chart-title">{{ title() }}</h3>
+  }
+
+  <!-- Chart area -->
+  <div class="chart-body" [@chartSwap]="chartType()">
+    @if (isEmpty()) {
+      <div class="chart-empty">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+          <rect x="8" y="28" width="8" height="12" rx="2" fill="currentColor" opacity="0.2" />
+          <rect x="20" y="18" width="8" height="22" rx="2" fill="currentColor" opacity="0.15" />
+          <rect x="32" y="24" width="8" height="16" rx="2" fill="currentColor" opacity="0.1" />
+        </svg>
+        <span>No data available</span>
+      </div>
+    } @else {
+      @switch (chartType()) {
+        @case ('line') {
+          <io-chart-line
+            [series]="series()"
+            [dimensions]="dimensions()"
+            (tooltipEvent)="onTooltip($event)"
+          />
+        }
+        @case ('column') {
+          <io-chart-column
+            [series]="series()"
+            [dimensions]="dimensions()"
+            (tooltipEvent)="onTooltip($event)"
+          />
+        }
+        @case ('pie') {
+          <io-chart-pie
+            [series]="series()"
+            [dimensions]="dimensions()"
+            (tooltipEvent)="onTooltip($event)"
+          />
+        }
+        @default {
+          <io-chart-column
+            [series]="series()"
+            [dimensions]="dimensions()"
+            (tooltipEvent)="onTooltip($event)"
+          />
+        }
+      }
+    }
+  </div>
+
+  @if (!isEmpty()) {
+    <io-chart-legend [series]="series()" />
+  }
+</div>
+
+<io-chart-tooltip [data]="tooltipData()" />

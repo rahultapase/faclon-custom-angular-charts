@@ -1,0 +1,14 @@
+<div class="legend">
+  @for (item of series(); track $index) {
+    <div
+      class="legend-item"
+      (mouseenter)="onItemEnter($index)"
+      (mouseleave)="onItemLeave()"
+      [title]="item.name + ': ' + item.value"
+    >
+      <span class="legend-dot" [style.background-color]="item.color"></span>
+      <span class="legend-name">{{ item.name }}</span>
+      <span class="legend-value">{{ item.value }}</span>
+    </div>
+  }
+</div>

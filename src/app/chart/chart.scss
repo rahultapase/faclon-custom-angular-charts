@@ -1,0 +1,67 @@
+:host {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.chart-card {
+  background: var(--chart-surface);
+  border: 1px solid var(--chart-border-subtle);
+  border-radius: 16px;
+  padding: 28px 24px 20px;
+  box-shadow:
+    0 1px 2px var(--chart-shadow-sm),
+    0 8px 24px var(--chart-shadow-md),
+    0 24px 48px var(--chart-shadow-lg);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.02) 0%,
+      transparent 50%,
+      rgba(0, 0, 0, 0.03) 100%
+    );
+    pointer-events: none;
+    border-radius: inherit;
+  }
+}
+
+.chart-title {
+  font-family: var(--chart-font-display);
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--chart-text);
+  margin: 0 0 20px;
+  letter-spacing: -0.01em;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.chart-body {
+  position: relative;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  color: var(--chart-text-muted);
+  font-family: var(--chart-font-body);
+  font-size: 14px;
+  padding: 40px 0;
+
+  svg {
+    opacity: 0.5;
+  }
+}

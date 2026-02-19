@@ -1,0 +1,73 @@
+<svg
+  class="chart-column-svg"
+  [attr.viewBox]="viewBox()"
+  preserveAspectRatio="xMidYMid meet"
+>
+  <!-- Grid lines -->
+  @for (g of gridLines(); track g.value) {
+    <line
+      class="grid-line"
+      [attr.x1]="area().x"
+      [attr.y1]="g.y"
+      [attr.x2]="area().x + area().width"
+      [attr.y2]="g.y"
+    />
+    <text
+      class="axis-label y-label"
+      [attr.x]="area().x - 10"
+      [attr.y]="g.y + 4"
+      text-anchor="end"
+    >
+      {{ g.label }}
+    </text>
+  }
+
+  <!-- X axis baseline -->
+  <line
+    class="axis-line"
+    [attr.x1]="area().x"
+    [attr.y1]="area().y + area().height"
+    [attr.x2]="area().x + area().width"
+    [attr.y2]="area().y + area().height"
+  />
+
+  <!-- Bars -->
+  @for (bar of bars(); track bar.index) {
+    <rect
+      class="bar"
+      [class.hovered]="hoveredIndex() === bar.index"
+      [class.dimmed]="hoveredIndex() !== null && hoveredIndex() !== bar.index"
+      [attr.x]="bar.x"
+      [attr.y]="bar.y"
+      [attr.width]="bar.width"
+      [attr.height]="bar.height"
+      [attr.fill]="bar.item.color"
+      rx="3"
+      ry="3"
+      [style.animation-delay]="(bar.index * 100) + 'ms'"
+      (mouseenter)="onBarEnter(bar.index, $event)"
+      (mouseleave)="onBarLeave()"
+    />
+
+    <!-- Value label on top -->
+    <text
+      class="bar-value"
+      [attr.x]="bar.x + bar.width / 2"
+      [attr.y]="bar.y - 8"
+      text-anchor="middle"
+      [style.animation-delay]="(bar.index * 100 + 200) + 'ms'"
+    >
+      {{ bar.item.value }}
+    </text>
+
+    <!-- X-axis label -->
+    <text
+      class="axis-label x-label"
+      [attr.x]="bar.x + bar.width / 2"
+      [attr.y]="area().y + area().height + 22"
+      text-anchor="middle"
+    >
+      {{ bar.item.name }}
+    </text>
+  }
+</svg>

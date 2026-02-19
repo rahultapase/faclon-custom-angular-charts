@@ -1,0 +1,14 @@
+@if (visible() && data(); as d) {
+  <div
+    class="tooltip"
+    [style.left]="style().left"
+    [style.top]="style().top"
+  >
+    <span class="tooltip-dot" [style.background-color]="d.item.color"></span>
+    <span class="tooltip-name">{{ d.item.name }}</span>
+    <span class="tooltip-value">{{ d.item.value }}</span>
+    @if (d.percentage !== undefined) {
+      <span class="tooltip-pct">({{ d.percentage }}%)</span>
+    }
+  </div>
+}

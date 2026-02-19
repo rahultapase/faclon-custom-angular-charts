@@ -1,0 +1,167 @@
+<div class="app-shell">
+  <div class="theme-toggle" (click)="toggleTheme()" role="switch" [attr.aria-checked]="!isDark()" aria-label="Toggle light/dark mode">
+    <div class="toggle-track" [class.light]="!isDark()">
+      <!-- Sun icon -->
+      <svg class="toggle-icon sun" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="5"/>
+        <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+      <div class="toggle-thumb"></div>
+      <!-- Moon icon -->
+      <svg class="toggle-icon moon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </div>
+  </div>
+
+  <header class="app-header">
+    <h1 class="app-title">Data<span class="accent">Pulse</span></h1>
+    <p class="app-subtitle">Edit the inputs below &mdash; the chart renders dynamically based on your configuration.</p>
+  </header>
+
+  <!-- DYNAMIC PLAYGROUND -->
+  <section class="demo-section playground-section">
+    <div class="playground-layout">
+      <!-- Controls Panel -->
+      <div class="playground-controls">
+        <!-- Chart Type -->
+        <div class="control-group">
+          <label class="control-label">Chart Type</label>
+          <div class="type-selector">
+            @for (t of ['line', 'column', 'pie']; track t) {
+              <button
+                class="type-btn"
+                [class.active]="playType() === t"
+                (click)="onPlayTypeChange($any(t))"
+              >
+                @switch (t) {
+                  @case ('line') {
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <polyline points="1,12 5,6 9,9 15,2" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  }
+                  @case ('column') {
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <rect x="1" y="8" width="3.5" height="7" rx="0.5" fill="currentColor"/>
+                      <rect x="6.25" y="4" width="3.5" height="11" rx="0.5" fill="currentColor"/>
+                      <rect x="11.5" y="6" width="3.5" height="9" rx="0.5" fill="currentColor"/>
+                    </svg>
+                  }
+                  @case ('pie') {
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <path d="M8 1A7 7 0 1 1 1 8h7V1z" fill="currentColor" opacity="0.7"/>
+                      <path d="M8 1v7h7A7 7 0 0 0 8 1z" fill="currentColor"/>
+                    </svg>
+                  }
+                }
+                {{ t | titlecase }}
+              </button>
+            }
+          </div>
+        </div>
+
+        <!-- Title -->
+        <div class="control-group">
+          <label class="control-label" for="playTitle">Title</label>
+          <input
+            id="playTitle"
+            class="control-input"
+            type="text"
+            [value]="playTitle()"
+            (input)="onPlayTitleChange($any($event.target).value)"
+            placeholder="Chart title…"
+          />
+        </div>
+
+        <!-- Series Data -->
+        <div class="control-group">
+          <div class="control-label-row">
+            <label class="control-label">Series Data</label>
+            <button class="add-btn" (click)="addSeriesItem()" title="Add series item">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <line x1="7" y1="2" x2="7" y2="12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                <line x1="2" y1="7" x2="12" y2="7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              Add
+            </button>
+          </div>
+
+          <div class="series-table">
+            <div class="series-header">
+              <span class="series-col-label col-color">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none">
+                  <circle cx="5.5" cy="5.5" r="4.5" stroke="currentColor" stroke-width="1.2"/>
+                  <circle cx="5.5" cy="5.5" r="2" fill="currentColor" opacity="0.5"/>
+                </svg>
+              </span>
+              <span class="series-col-label col-name">Name</span>
+              <span class="series-col-label col-value">Value</span>
+              <span class="series-col-spacer remove-spacer"></span>
+            </div>
+            <div class="series-list">
+            @for (item of playSeries(); track $index) {
+              <div class="series-row">
+                <input
+                  class="series-color"
+                  type="color"
+                  [value]="item.color"
+                  (input)="onSeriesColorChange($index, $any($event.target).value)"
+                  title="Color"
+                />
+                <input
+                  class="series-name"
+                  type="text"
+                  [value]="item.name"
+                  (input)="onSeriesNameChange($index, $any($event.target).value)"
+                  placeholder="Name"
+                />
+                <input
+                  class="series-value"
+                  type="number"
+                  [value]="item.value"
+                  (input)="onSeriesValueChange($index, +$any($event.target).value)"
+                  placeholder="0"
+                  min="0"
+                />
+                <button class="remove-btn" (click)="removeSeriesItem($index)" title="Remove">
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                    <line x1="1" y1="1" x2="9" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <line x1="9" y1="1" x2="1" y2="9" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                </button>
+              </div>
+            }
+            @if (playSeries().length === 0) {
+              <p class="series-empty">No data &mdash; click <strong>Add</strong> to create series items.</p>
+            }
+            </div>
+          </div>
+        </div>
+
+        <!-- Presets -->
+        <div class="control-group">
+          <label class="control-label">Quick Presets</label>
+          <div class="preset-row">
+            <button class="preset-btn" (click)="loadPreset('line')">Line Demo</button>
+            <button class="preset-btn" (click)="loadPreset('column')">Column Demo</button>
+            <button class="preset-btn" (click)="loadPreset('pie')">Pie Demo</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ─── Live Chart ─── -->
+      <div class="playground-chart">
+        <io-chart [chartOptions]="playOptions()" />
+      </div>
+    </div>
+  </section>
+
+  <footer class="app-footer">
+    <p>Built with Angular 21 &bull; Pure SVG &bull; No external libraries</p>
+  </footer>
+</div>
+

@@ -1,0 +1,57 @@
+:host {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.tooltip {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: var(--chart-tooltip-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--chart-input-border);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px var(--chart-shadow-md);
+  white-space: nowrap;
+  animation: tooltipIn 0.15s ease-out;
+}
+
+.tooltip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tooltip-name {
+  font-family: var(--chart-font-body);
+  font-size: 12px;
+  color: var(--chart-text);
+}
+
+.tooltip-value {
+  font-family: var(--chart-font-body);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--chart-accent);
+}
+
+.tooltip-pct {
+  font-family: var(--chart-font-body);
+  font-size: 11px;
+  color: var(--chart-text-muted);
+}
+
+@keyframes tooltipIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

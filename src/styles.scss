@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --chart-bg: #0b0d14;
+  --chart-surface: #13151e;
+  --chart-text: #e8e4df;
+  --chart-text-muted: #7a7d8a;
+  --chart-grid: rgba(255, 255, 255, 0.06);
+  --chart-accent: #f0a050;
+  --chart-font-display: 'DM Serif Display', Georgia, serif;
+  --chart-font-body: 'Outfit', system-ui, sans-serif;
+
+  // Semantic overlay / border tokens (dark defaults)
+  --chart-border: rgba(255, 255, 255, 0.06);
+  --chart-border-subtle: rgba(255, 255, 255, 0.04);
+  --chart-overlay: rgba(255, 255, 255, 0.03);
+  --chart-overlay-hover: rgba(255, 255, 255, 0.06);
+  --chart-input-bg: rgba(255, 255, 255, 0.04);
+  --chart-input-border: rgba(255, 255, 255, 0.08);
+  --chart-tooltip-bg: rgba(20, 22, 30, 0.92);
+  --chart-shadow-sm: rgba(0, 0, 0, 0.2);
+  --chart-shadow-md: rgba(0, 0, 0, 0.25);
+  --chart-shadow-lg: rgba(0, 0, 0, 0.15);
+  --chart-swatch-bg: #1a1c25;
+  --chart-swatch-border: rgba(255, 255, 255, 0.12);
+  --chart-legend-glow: rgba(255, 255, 255, 0.1);
+  --chart-accent-shadow: rgba(240, 160, 80, 0.3);
+  --chart-accent-bg: rgba(240, 160, 80, 0.08);
+  --chart-accent-border: rgba(240, 160, 80, 0.15);
+  --chart-accent-focus-ring: rgba(240, 160, 80, 0.12);
+  color-scheme: dark;
+}
+
+// ── Light Theme ──
+[data-theme='light'] {
+  --chart-bg: #f4f2ee;
+  --chart-surface: #ffffff;
+  --chart-text: #1a1a2e;
+  --chart-text-muted: #6b7085;
+  --chart-grid: rgba(0, 0, 0, 0.07);
+  --chart-accent: #d4801a;
+
+  --chart-border: rgba(0, 0, 0, 0.08);
+  --chart-border-subtle: rgba(0, 0, 0, 0.05);
+  --chart-overlay: rgba(0, 0, 0, 0.02);
+  --chart-overlay-hover: rgba(0, 0, 0, 0.05);
+  --chart-input-bg: rgba(0, 0, 0, 0.03);
+  --chart-input-border: rgba(0, 0, 0, 0.1);
+  --chart-tooltip-bg: rgba(255, 255, 255, 0.96);
+  --chart-shadow-sm: rgba(0, 0, 0, 0.05);
+  --chart-shadow-md: rgba(0, 0, 0, 0.08);
+  --chart-shadow-lg: rgba(0, 0, 0, 0.04);
+  --chart-swatch-bg: #f0f0f2;
+  --chart-swatch-border: rgba(0, 0, 0, 0.15);
+  --chart-legend-glow: rgba(0, 0, 0, 0.08);
+  --chart-accent-shadow: rgba(212, 128, 26, 0.25);
+  --chart-accent-bg: rgba(212, 128, 26, 0.08);
+  --chart-accent-border: rgba(212, 128, 26, 0.18);
+  --chart-accent-focus-ring: rgba(212, 128, 26, 0.15);
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--chart-bg);
+  color: var(--chart-text);
+  font-family: var(--chart-font-body);
+  line-height: 1.5;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  transition: background-color 0.4s ease, color 0.4s ease;
+
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+*,
+*::before,
+*::after {
+  transition:
+    background-color 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease,
+    color 0.4s ease,
+    fill 0.4s ease,
+    stroke 0.4s ease;
+}

@@ -1,6 +1,15 @@
-# DataPulse
+# 📊 DataPulse
 
 A reusable, SVG-powered chart component built with **Angular 21** — no external chart libraries used. Supports **Line**, **Column**, and **Pie** charts rendered entirely with custom SVG logic.
+
+---
+
+## Live Demo
+
+| | Link |
+|---|---|
+| 🚀 Deployed App | [faclon-custom-angular-charts.vercel.app](https://faclon-custom-angular-charts.vercel.app) |
+| 💻 Source Code | [github.com/rahultapase/faclon-custom-angular-charts](https://github.com/rahultapase/faclon-custom-angular-charts) |
 
 ---
 
@@ -25,13 +34,13 @@ A reusable, SVG-powered chart component built with **Angular 21** — no externa
 
 | Line Chart | Column Chart | Pie Chart |
 |---|---|---|
-| ![Line Chart Light](screenshots/light/line-chart.png) | ![Column Chart Light](screenshots/light/column-chart.png) | ![Pie Chart Light](screenshots/light/pie-chart.png) |
+| ![Line Chart Light](screenshots/light-line-chart.png) | ![Column Chart Light](screenshots/light-column-chart.png) | ![Pie Chart Light](screenshots/light-pie-chart.png) |
 
 ### Dark Mode
 
 | Line Chart | Column Chart | Pie Chart |
 |---|---|---|
-| ![Line Chart Dark](screenshots/dark/line-chart.png) | ![Column Chart Dark](screenshots/dark/column-chart.png) | ![Pie Chart Dark](screenshots/dark/pie-chart.png) |
+| ![Line Chart Dark](screenshots/dark-line-chart.png) | ![Column Chart Dark](screenshots/dark-column-chart.png) | ![Pie Chart Dark](screenshots/dark-pie-chart.png) |
 
 ---
 
